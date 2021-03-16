@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.selected{
+  font-weight: "bold";
+  color: "red";
+}
+
+ul li{
+  float: left;
+  clear: both;
+  list-style: none;
+  margin-right: 5%;
+}
+
+ul li NavLink{
+  text-decoration: none;
+}
