@@ -1,0 +1,19 @@
+.title {
+  font-family: Lato;
+  font-weight: 100;
+  font-style: italic;
+  color: #979797;
+  margin-bottom: 30px;
+}
+
+.entire-page {
+  max-width: 500px;
+  position: relative;
+  left: 370px;
+  background-color: rgb(186, 190, 178);
+}
+
+.agree-section {
+  position: relative;
+  left: 170px;
+}

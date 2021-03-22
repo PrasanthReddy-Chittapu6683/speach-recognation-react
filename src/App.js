@@ -1,8 +1,16 @@
-import logo from './logo.svg';
-import { BrowserRouter as Router, Switch, Route, NavLink  } from 'react-router-dom';
-import './App.css';
-import FingerHandpose from './components/fingerhandpose/FingerHandpose';
-
+import logo from "./logo.svg";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink
+} from "react-router-dom";
+import "./App.css";
+import FingerHandpose from "./components/fingerhandpose/FingerHandpose";
+import TermsAndCondition from "./components/speechRecognition/termsAndCondition";
+import "./components/speechRecognition/style.css";
+import SpeakSearchSaveComponent from "./components/speechRecognition/S3Component";
+import React from "react";
 function App() {
   return (
     <Router>
@@ -10,7 +18,9 @@ function App() {
         <nav>
           <ul>
             <li>
-              <NavLink to="/" activeClassName="selected">Home</NavLink>
+              <NavLink to="/" activeClassName="selected">
+                Home
+              </NavLink>
             </li>
             <li>
               <NavLink to="/speechrecognition">Speech Recognition</NavLink>
@@ -25,13 +35,12 @@ function App() {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/speechrecognition">
-            <SpeechRecognition />
+            <TermsAndCondition />
           </Route>
-
           <Route path="/handfingerpose">
             <FingerHandpose />
           </Route>
-
+          <Route path="/home" component={SpeakSearchSaveComponent} />
           <Route path="/">
             <Home />
           </Route>
@@ -59,10 +68,5 @@ function Home() {
     </header>
   );
 }
-
-function SpeechRecognition() {
-  return <h2>Speech Recognition</h2>;
-}
-
 
 export default App;
