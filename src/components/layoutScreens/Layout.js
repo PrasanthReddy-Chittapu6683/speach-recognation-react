@@ -16,7 +16,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 // import Menu from '@material-ui/icons/Menu';
-import { MdChevronLeft, MdMenu, MdNotifications } from 'react-icons/md';
+import { MdChevronLeft, MdMenu, MdNotifications, MdQuestionAnswer } from 'react-icons/md';
 import { mainListItems, secondaryListItems } from '../menus/Menu';
 import { GiArtificialIntelligence } from 'react-icons/gi';
 import { FaReact } from 'react-icons/fa';
@@ -171,8 +171,8 @@ const Layout = () => {
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={1}>
                         <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <Typography component="h1" variant="h4">Have content and ask Quetions : </Typography>
+                            <Paper className={fixedHeightPaper} >
+                                <Typography component="h1" variant="h4" style={{display:'flex', justifyContent:'center' , alignContent:'center'}}><MdQuestionAnswer/> Have content and ask Quetions : </Typography>
                                 {/* <TermsAndCondition /> */}
                                 <AutoQA />
                             </Paper>
