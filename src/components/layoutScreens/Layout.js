@@ -172,7 +172,7 @@ const Layout = () => {
                     <Grid container spacing={1}>
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper className={fixedHeightPaper}>
-                                <h1>ASDSD</h1>
+                                <Typography component="h1" variant="h4">Have content and ask Quetions : </Typography>
                                 {/* <TermsAndCondition /> */}
                                 <AutoQA />
                             </Paper>

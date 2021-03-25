@@ -3,6 +3,7 @@ import * as tf from "@tensorflow/tfjs";
 import * as qna from "@tensorflow-models/qna";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import { Typography } from '@material-ui/core';
 
 
 
@@ -35,10 +36,12 @@ const AutoQA = () => {
     useEffect(() => { loadModel() }, [])
 
     return (
-        <div>
+        <div style={{alignItems:'center'}}>
             {model == null ?
                 <div>
-                    <div>Model Loading</div>
+                     <Typography component="h3" variant="h5">Model Loading ... </Typography>
+                                
+                    <div></div>
                     <Loader
                         type="Puff"
                         color="#00BFFF"
