@@ -32,23 +32,28 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-.selected{
+.selected {
   font-weight: "bold";
   color: "red";
 }
 
-ul li{
+ul li {
   float: left;
   clear: both;
   list-style: none;
   margin-right: 5%;
 }
 
-ul li NavLink{
+ul li NavLink {
   text-decoration: none;
+}
+
+.MuiListItemIcon-root {
+  font-size: 2em;
 }

@@ -7,6 +7,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 ### `npm start`
+### `npm install @material-ui/core`
+### `npm install react-bootstrap bootstrap`
+### `npm install react-icons --save`
+### `npm install @tensorflow/tfjs`
+### `npm install  @tensorflow-models/qna`
+### `npm install react-loader-spinner`
+
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

@@ -125,7 +125,7 @@ export default class TermsAndCondition extends React.Component {
                 I Agree to Terms & Conditions
                 <br />
                 <br />
-                <Link to="/home">
+                {/* <Link to="/home"> */}
                   <button
                     id="submit"
                     className="btn btn-primary"
@@ -134,7 +134,7 @@ export default class TermsAndCondition extends React.Component {
                   >
                     Proceed to Home page
                   </button>
-                </Link>
+                {/* </Link> */}
               </div>
             </div>
           </div>
