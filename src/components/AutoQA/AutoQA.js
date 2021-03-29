@@ -4,9 +4,10 @@ import * as qna from "@tensorflow-models/qna";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import {
-    Box, Card, CardContent, FilledInput, IconButton, InputAdornment, InputBase, List, ListItem, ListItemText, Paper,
+    Box, Card, CardContent, FilledInput, FormControl, FormHelperText, IconButton, InputAdornment, InputBase, List, ListItem, ListItemText, MenuItem, Paper,
     TextareaAutosize, TextField, Typography
 } from '@material-ui/core';
+import InputLabel from '@material-ui/core/InputLabel';
 import Divider from '@material-ui/core/Divider';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { MdAccountCircle, MdQuestionAnswer } from 'react-icons/md';
@@ -18,8 +19,9 @@ import { GrResume } from 'react-icons/gr';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import { AiFillPlayCircle } from 'react-icons/ai';
+import { RiKakaoTalkFill } from 'react-icons/ri';
 
-
+import Select from '@material-ui/core/Select';
 
 
 
@@ -47,6 +49,15 @@ const useStyles = makeStyles((theme) => ({
         height: 28,
         margin: 4,
     },
+    formControl: {
+        // margin: theme.spacing(1),
+        flex: 0.5
+        // minWidth: 220,
+
+    },
+    selectEmpty: {
+        marginTop: theme.spacing(2),
+    },
 }));
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -61,7 +72,7 @@ if (synth.speaking) { /* stop narration */
 const AutoQA = () => {
     const passageRef = useRef(null);
     const [questionVal, setQuestionVal] = useState(null)
-    const [answer, setAnswer] = useState();
+    const [answer, setAnswer] = useState(null);
     const [model, setModel] = useState(null);
     const [isPlaying, setIsPlaying] = useState(false)
     const [isResumePlaying, setisResumePlaying] = useState(false)
@@ -69,11 +80,12 @@ const AutoQA = () => {
     const [note, setNote] = useState("");
     const [isListening, setIsListening] = useState(true);
     const [isLoading, setIsLoading] = useState(false)
+    const [voicesList, setVoicesList] = useState([])
     // Load Tensorflow Model
     const loadModel = async () => {
         const loadedModel = await qna.load()
         setModel(loadedModel);
-        console.log('Model loaded.')
+        // console.log('Model loaded.')
     }
     const answerQuestion = async (e, questionData = null) => {
         if ((model !== null && (questionVal || questionData) && passageRef?.current?.value)) {
@@ -83,9 +95,9 @@ const AutoQA = () => {
             const question = questionVal || questionData;
             const answers = await model.findAnswers(question, passage)
             setTimeout(() => {
-                console.log('Question submitted.')
+                // console.log('Question submitted.')
                 setAnswer(answers);
-                console.log(answers)
+                // console.log(answers)
                 setIsLoading(false);
             }, 1000);
         }
@@ -94,27 +106,43 @@ const AutoQA = () => {
         setQuestionVal(e?.currentTarget?.value)
     }
 
-    useEffect(() => { loadModel() }, [])
+    useEffect(() => {
+        loadModel()
+        let voices = window.speechSynthesis.getVoices();
+        setVoicesList(voices)
+        setVoiceSelect(voices[0])
+        // console.log(voicesList)
+    }, [])
+
+    const [micState, setMicState] = useState(false)
 
     const handleListen = () => {
-        if (true) {
+        if (!micState) {
+            setMicState(true)
             mic.start();
             mic.onend = () => {
                 mic.stop();
+                setMicState(false)
+                console.log('mic onend')
             };
         } else {
+            setMicState(false)
             mic.stop();
+            console.log('mic stop')
+
         }
 
         // This runs when the speech recognition service starts
         mic.onstart = function () {
             console.log("We are listening. Try speaking into the microphone.");
+            setMicState(true)
         };
 
         mic.onspeechend = function () {
             // when user is done speaking
             mic.stop();
             console.log("Speaking ends");
+            setMicState(false)
 
         }
 
@@ -123,7 +151,7 @@ const AutoQA = () => {
                 .map(result => result[0])
                 .map(result => result.transcript)
                 .join("");
-
+            setMicState(true)
             setNote(transcript);
             console.log(transcript)
             setQuestionVal(transcript)
@@ -153,20 +181,20 @@ const AutoQA = () => {
         //Speech utterance library. Will pseak for you
         if (passageRef?.current?.value) {
             setIsPlaying(true)
-            console.log('Start in Speaking');
+            // console.log('Start in Speaking');
             let speech = new SpeechSynthesisUtterance();
-            var voices = window.speechSynthesis.getVoices();
-            console.log(voices)
-            speech.lang = "en-US";
+
+
+            speech.lang = (voiceSelect?.lang) ? voiceSelect?.lang : "en-US";
             speech.text = passageRef?.current?.value;
             speech.volume = 1;
             speech.rate = 1;
             speech.pitch = 1;
-            speech.voice = voices[3];
+            speech.voice = voiceSelect ? voiceSelect : voicesList[3];
             window.speechSynthesis.speak(speech);
             speech.onend = function (e) {
                 setIsPlaying(false)
-                console.log('Finished in Speaking');
+                // console.log('Finished in Speaking');
             };
         } else {
             alert('No Content placed')
@@ -175,7 +203,7 @@ const AutoQA = () => {
 
     const pauseVoice = () => {
         window.speechSynthesis.pause()
-        
+
         setisResumePlaying(true)
         setIsPlaying(true)
     }
@@ -189,7 +217,14 @@ const AutoQA = () => {
         setIsPlaying(false)
         setisResumePlaying(false)
     }
-   
+    const [voiceSelect, setVoiceSelect] = React.useState('');
+
+    const handleVoiceSelectChange = (event) => {
+        setVoiceSelect(event.target.value);
+        // console.log(event.target.value)
+    };
+
+
     return (
         <div style={{ alignItems: 'center' }}>
             {/* <Backdrop open={openBackDrop} >
@@ -207,38 +242,62 @@ const AutoQA = () => {
                     < >
                         <Divider style={{ marginTop: '10px' }} orientation="horizontal" />
                         <Box p={2} m={2} justifyContent='center' alignItems='center'>
-                            <Typography style={{ display: 'flex', alignItems: 'center' }} component="h6" variant="h6">Paste your content below and ask questions
+                            <Box p={2} display='flex' flex='1'  >
+
+
+                                <Typography style={{ display: 'flex', alignItems: 'center', flex: 0.5 }} component="h6" variant="h6">Paste your content below and ask questions
                               {
-                                    !isPlaying ?
-                                        <IconButton title='Read the content loud' style={{ cursor: 'pointer' }} onClick={readLoud}
-                                            className={classes.iconButton} >
-                                            <FcSpeaker />
-                                        </IconButton>
-                                        :
-                                        <>
-                                            {
-                                                isResumePlaying ?
-                                                    <IconButton title='Resume' style={{ cursor: 'pointer' }} onClick={resumeVoice}
-                                                        className={classes.iconButton} >
-                                                        <AiFillPlayCircle color='#329060'/>
-                                                    </IconButton> : <>
-                                                        <IconButton title='Pause' style={{ cursor: 'pointer' }} onClick={pauseVoice}
-                                                            className={classes.iconButton} >
-                                                            <FaRegPauseCircle   />
-                                                        </IconButton>
-                                                    </>
-                                            }
-
-                                            <IconButton title='Pause' style={{ cursor: 'pointer' }} onClick={stopVoice}
+                                        !isPlaying ?
+                                            <IconButton title='Read the content loud' style={{ cursor: 'pointer' }} onClick={readLoud}
                                                 className={classes.iconButton} >
-                                                <FaStopCircle color='#b93838' />
+                                                <FcSpeaker />
                                             </IconButton>
-                                        </>
-                                }
-                            </Typography>
+                                            :
+                                            <>
+                                                {
+                                                    isResumePlaying ?
+                                                        <IconButton title='Resume' style={{ cursor: 'pointer' }} onClick={resumeVoice}
+                                                            className={classes.iconButton} >
+                                                            <AiFillPlayCircle color='#329060' />
+                                                        </IconButton> : <>
+                                                            <IconButton title='Pause' style={{ cursor: 'pointer' }} onClick={pauseVoice}
+                                                                className={classes.iconButton} >
+                                                                <FaRegPauseCircle />
+                                                            </IconButton>
+                                                        </>
+                                                }
 
+                                                <IconButton title='Pause' style={{ cursor: 'pointer' }} onClick={stopVoice}
+                                                    className={classes.iconButton} >
+                                                    <FaStopCircle color='#b93838' />
+                                                </IconButton>
+                                            </>
+                                    }
+                                </Typography>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel id="demo-simple-select-helper-label">Select Voice</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-helper-label"
+                                        id="demo-simple-select-helper"
+                                        value={voiceSelect}
+                                        onChange={handleVoiceSelectChange}
+                                    >
+                                        {/* <MenuItem value="">
+                                            <em>None</em>
+                                        </MenuItem> */}
+                                        {
+                                            voicesList.map((val, ind) => (
 
-                            <TextareaAutosize fullWidth cols={158} ref={passageRef} aria-label="minimum height"
+                                                <MenuItem key={ind} value={val}>{val.name}</MenuItem>
+                                            ))
+                                        }
+
+                                    </Select>
+                                    <FormHelperText>Select your favorite voice to communicate</FormHelperText>
+                                </FormControl>
+
+                            </Box>
+                            <TextareaAutosize cols={158} ref={passageRef} aria-label="minimum height"
                                 rowsMin={15} placeholder="Paste your content" />
 
                             {/* <Typography component="h6" variant="h6"></Typography> */}
@@ -259,8 +318,16 @@ const AutoQA = () => {
                                     <FaSearch />
                                 </IconButton>
                                 <Divider className={classes.divider} orientation="vertical" />
-                                <IconButton color="primary" onClick={handleListen} className={classes.iconButton} aria-label="directions">
-                                    <FaMicrophoneAlt />
+
+                                <IconButton color="primary" onClick={handleListen} className={classes.iconButton} >
+                                    {
+                                        !micState ?
+                                            <FaMicrophoneAlt title='Start speaking'/>
+
+                                            :
+                                            <Loader type="ThreeDots" title='Stop speaking' color="#00BFFF" height={20} width={22} />
+                                        // <RiKakaoTalkFill />
+                                    }
                                 </IconButton>
                             </Paper>
 
@@ -345,7 +412,7 @@ const AutoQA = () => {
                     {answer ? answer.map((ans, idx) => <div><b>Answer {idx + 1} - </b> {ans.text} ({Math.floor(ans.score * 100) / 100})</div>) : ""} */}
                 </>
             }
-        </div>
+        </div >
     )
 }
 
