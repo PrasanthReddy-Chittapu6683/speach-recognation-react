@@ -16,38 +16,51 @@ import { GiMetalHand } from 'react-icons/gi'
 import { SiTeamspeak } from 'react-icons/si'
 import { RiBarChartGroupedLine } from 'react-icons/ri'
 
+import FingerHandpose from "../fingerhandpose/FingerHandpose"; 
+
+import {
+    BrowserRouter as Router,
+    NavLink
+  } from "react-router-dom";
+
 export const mainListItems = (
     <div>
-        <ListItem button >
-            <ListItemIcon >
-                <SiTeamspeak  style={{ color: '#3f51b5' }}/>
-            </ListItemIcon>
-            <ListItemText primary="Speach Recognition" />
-        </ListItem>
-        <ListItem button  >
-            <ListItemIcon  >
-                <GiMetalHand style={{ color: '#3f51b5' }} />
-            </ListItemIcon>
-            <ListItemText primary="Hand Detection" />
-        </ListItem>
-        <ListItem button>
-            <ListItemIcon>
-                <MdPeople style={{ color: '#3f51b5' }}/>
-            </ListItemIcon>
-            <ListItemText primary="Customers" />
-        </ListItem>
-        {/* <ListItem button>
-            <ListItemIcon>
-                <RiBarChartGroupedLine />
-            </ListItemIcon>
-            <ListItemText primary="Reports" />
-        </ListItem>
-        <ListItem button>
-            <ListItemIcon>
-                <MdLayers />
-            </ListItemIcon>
-            <ListItemText primary="Integrations" />
-        </ListItem> */}
+        <NavLink to="/speechrecognition">
+            <ListItem button >
+                <ListItemIcon >
+                    <SiTeamspeak  style={{ color: '#3f51b5' }}/>
+                </ListItemIcon>
+                <ListItemText primary="Speach Recognition" />
+            </ListItem>
+        </NavLink>
+        <NavLink to="/handfingerpose">
+            <ListItem button  >
+                <ListItemIcon  >
+                    <GiMetalHand style={{ color: '#3f51b5' }} />
+                </ListItemIcon>
+                <ListItemText primary="Hand Detection" />
+            </ListItem>
+        </NavLink>
+        <NavLink to="/">
+            <ListItem button>
+                <ListItemIcon>
+                    <MdPeople style={{ color: '#3f51b5' }}/>
+                </ListItemIcon>
+                <ListItemText primary="Customers" />
+            </ListItem>
+        </NavLink>
+            {/* <ListItem button>
+                <ListItemIcon>
+                    <RiBarChartGroupedLine />
+                </ListItemIcon>
+                <ListItemText primary="Reports" />
+            </ListItem>
+            <ListItem button>
+                <ListItemIcon>
+                    <MdLayers />
+                </ListItemIcon>
+                <ListItemText primary="Integrations" />
+            </ListItem> */}
     </div>
 );
 

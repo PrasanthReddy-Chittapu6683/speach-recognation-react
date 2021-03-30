@@ -25,6 +25,15 @@ import { AiFillGithub } from 'react-icons/ai';
 import TermsAndCondition from '../speechRecognition/termsAndCondition';
 import AutoQA from '../AutoQA/AutoQA';
 
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    NavLink
+  } from "react-router-dom";
+
+import FingerHandpose from "../fingerhandpose/FingerHandpose"; 
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -172,9 +181,23 @@ const Layout = () => {
                     <Grid container spacing={1}>
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper className={fixedHeightPaper} >
-                                <Typography component="h1" variant="h4" style={{display:'flex', justifyContent:'center' , alignContent:'center'}}><MdQuestionAnswer/> Have content and ask Quetions : </Typography>
-                                {/* <TermsAndCondition /> */}
-                                <AutoQA />
+                                <Switch>
+                                    <Route path="/speechrecognition">
+                                        <TermsAndCondition />
+                                    </Route>
+                                    <Route path="/handfingerpose">
+                                        <Box p={2} m={2} justifyContent='center' alignItems='center'>
+                                            <Box p={2} display='flex' flex='1'  >
+                                                <FingerHandpose />
+                                            </Box>
+                                        </Box>
+                                    </Route>
+                                    <Route path="/">
+                                        <Typography component="h1" variant="h4" style={{display:'flex', justifyContent:'center' , alignContent:'center'}}><MdQuestionAnswer/> Have content and ask Quetions : </Typography>
+                                        {/* <TermsAndCondition /> */}
+                                        <AutoQA />
+                                    </Route>
+                                </Switch>
                             </Paper>
                         </Grid>
                     </Grid>

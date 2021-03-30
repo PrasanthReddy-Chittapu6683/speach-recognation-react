@@ -120,8 +120,8 @@ function FingerHandpose() {
             right: 0,
             textAlign: "center",
             zindex: 9,
-            width: 640,
-            height: 480,
+            width: 540,
+            height: 380,
           }}
         />
 
@@ -135,8 +135,8 @@ function FingerHandpose() {
             right: 0,
             textAlign: "center",
             zindex: 9,
-            width: 640,
-            height: 480,
+            width: 540,
+            height: 380,
           }}
         />
         {/* NEW STUFF */}
@@ -149,6 +149,7 @@ function FingerHandpose() {
               marginRight: "auto",
               left: 400,
               bottom: 500,
+              top: 200,
               right: 0,
               textAlign: "center",
               height: 100,
