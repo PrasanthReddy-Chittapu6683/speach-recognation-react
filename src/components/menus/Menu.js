@@ -15,8 +15,11 @@ import { MdDashboard, MdShoppingCart, MdPeople, MdLayers, MdAssessment } from 'r
 import { GiMetalHand } from 'react-icons/gi'
 import { SiTeamspeak } from 'react-icons/si'
 import { RiBarChartGroupedLine } from 'react-icons/ri'
+import { ImUserCheck } from "react-icons/im";
 
-import FingerHandpose from "../fingerhandpose/FingerHandpose"; 
+
+import FingerHandpose from "../fingerhandpose/FingerHandpose";
+import FaceDetection from "../FaceDetection/FaceDetection";
 
 import {
     BrowserRouter as Router,
@@ -39,6 +42,14 @@ export const mainListItems = (
                     <GiMetalHand style={{ color: '#3f51b5' }} />
                 </ListItemIcon>
                 <ListItemText primary="Hand Detection" />
+            </ListItem>
+        </NavLink>
+        <NavLink to="/facedetection">
+            <ListItem button  >
+                <ListItemIcon  >
+                    <ImUserCheck style={{ color: '#3f51b5' }} />
+                </ListItemIcon>
+                <ListItemText primary="Face Detection" />
             </ListItem>
         </NavLink>
         <NavLink to="/">

@@ -33,6 +33,7 @@ import {
   } from "react-router-dom";
 
 import FingerHandpose from "../fingerhandpose/FingerHandpose"; 
+import FaceDetection from "../FaceDetection/FaceDetection";
 
 const drawerWidth = 240;
 
@@ -189,6 +190,13 @@ const Layout = () => {
                                         <Box p={2} m={2} justifyContent='center' alignItems='center'>
                                             <Box p={2} display='flex' flex='1'  >
                                                 <FingerHandpose />
+                                            </Box>
+                                        </Box>
+                                    </Route>
+                                    <Route path="/facedetection">
+                                        <Box p={2} m={2} justifyContent='center' alignItems='center'>
+                                            <Box p={2} display='flex' flex='1'  >
+                                                <FaceDetection />
                                             </Box>
                                         </Box>
                                     </Route>
