@@ -17,7 +17,7 @@ import Webcam from "react-webcam";
 import "../../App.css";
 import { drawHand } from "./helper/utilities";
 
-import {iluGesture} from "./customgesture/ILU";
+import { iluGesture } from "./customgesture/ILU";
 
 ///////// NEW STUFF IMPORTS
 import * as fp from "fingerpose";
@@ -35,12 +35,12 @@ function FingerHandpose() {
 
   ///////// NEW STUFF ADDED STATE HOOK
   const [emoji, setEmoji] = useState(null);
-  const images = { 
+  const images = {
     i_love_you: i_love_you,
-    thumbs_up: thumbs_up, 
+    thumbs_up: thumbs_up,
     victory: victory
   };
-  
+
   ///////// NEW STUFF ADDED STATE HOOK
 
   const runHandpose = async () => {
@@ -105,7 +105,7 @@ function FingerHandpose() {
     }
   };
 
-  useEffect(()=>{runHandpose()},[]);
+  useEffect(() => { runHandpose() }, []);
 
   return (
     <div className="App">
@@ -158,7 +158,7 @@ function FingerHandpose() {
         ) : (
           ""
         )}
-        
+
       </header>
     </div>
   );

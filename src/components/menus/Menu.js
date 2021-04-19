@@ -15,7 +15,7 @@ import { MdDashboard, MdShoppingCart, MdPeople, MdLayers, MdAssessment } from 'r
 import { GiMetalHand } from 'react-icons/gi'
 import { SiTeamspeak } from 'react-icons/si'
 import { RiBarChartGroupedLine } from 'react-icons/ri'
-import { ImUserCheck } from "react-icons/im";
+import { GiCyborgFace } from "react-icons/gi";
 
 
 import FingerHandpose from "../fingerhandpose/FingerHandpose";
@@ -24,43 +24,44 @@ import FaceDetection from "../FaceDetection/FaceDetection";
 import {
     BrowserRouter as Router,
     NavLink
-  } from "react-router-dom";
+} from "react-router-dom";
 
 export const mainListItems = (
     <div>
-        <NavLink to="/speechrecognition">
-            <ListItem button >
+        <NavLink to="/" >
+            <ListItem button title="Speech Recognition"s >
                 <ListItemIcon >
-                    <SiTeamspeak  style={{ color: '#3f51b5' }}/>
+                    <SiTeamspeak  style={{ color: '#3f51b5' }} />
                 </ListItemIcon>
-                <ListItemText primary="Speach Recognition" />
+                <ListItemText primary="Speech Recognition" />
             </ListItem>
         </NavLink>
         <NavLink to="/handfingerpose">
-            <ListItem button  >
+            <ListItem button title="Hand Detection" >
                 <ListItemIcon  >
-                    <GiMetalHand style={{ color: '#3f51b5' }} />
+                    <GiMetalHand  style={{ color: '#3f51b5' }} />
                 </ListItemIcon>
                 <ListItemText primary="Hand Detection" />
             </ListItem>
         </NavLink>
         <NavLink to="/facedetection">
-            <ListItem button  >
+            <ListItem button   title="Face Detection" >
                 <ListItemIcon  >
-                    <ImUserCheck style={{ color: '#3f51b5' }} />
+                <GiCyborgFace   style={{ color: '#3f51b5' }}> </GiCyborgFace>
+                    {/* // <ImUserCheck /> */}
                 </ListItemIcon>
                 <ListItemText primary="Face Detection" />
             </ListItem>
         </NavLink>
-        <NavLink to="/">
+        {/* <NavLink to="/speechrecognition">
             <ListItem button>
                 <ListItemIcon>
                     <MdPeople style={{ color: '#3f51b5' }}/>
                 </ListItemIcon>
-                <ListItemText primary="Customers" />
+                <ListItemText primary="Content Reading" />
             </ListItem>
-        </NavLink>
-            {/* <ListItem button>
+        </NavLink> */}
+        {/* <ListItem button>
                 <ListItemIcon>
                     <RiBarChartGroupedLine />
                 </ListItemIcon>
