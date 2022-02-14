@@ -1,0 +1,36 @@
+
+.react-slideshow-wrapper {
+    width: 50% !important;
+    /* border: 2px solid #14a37f; */
+    border-radius: 24px;
+}
+.react-slideshow-container{
+    justify-content: center;
+}
+.each-fade {
+    display: flex;
+    width: 100%;
+}
+
+.each-fade>div {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.each-fade>div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.each-fade p {
+    width: 25%;
+    font-size: 1em;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background: #adceed;
+}

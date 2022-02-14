@@ -1,14 +1,21 @@
-import {
-  BrowserRouter as Router, Switch, Route, NavLink
-} from "react-router-dom";
 import "./App.css";
 
 import React from "react";
 import Layout from "./components/layoutScreens/Layout";
+import { ErrorBoundary } from "react-error-boundary";
+import FallbackError from "./FallbackError";
+
+// import { FallbasckError } from "./FallbackError";
 function App() {
+  const errorHandler = (error, errInfo) => {
+    console.log("APP ERROR BOUND::: ", error, errInfo)
+  }
+
   return (
     <>
-      <Layout />
+      <ErrorBoundary FallbackComponent={FallbackError} onError={errorHandler}>
+        <Layout />
+      </ErrorBoundary>
     </>
   );
 }

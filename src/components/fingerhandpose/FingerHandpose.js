@@ -10,7 +10,7 @@ import React, { useRef, useState, useEffect } from "react";
 ///////// NEW STUFF ADDED USE STATE
 
 // import logo from './logo.svg';
-import * as tf from "@tensorflow/tfjs";
+// import * as tf from "@tensorflow/tfjs";
 import * as handpose from "@tensorflow-models/handpose";
 import Webcam from "react-webcam";
 // import "..//App.css";
@@ -43,14 +43,6 @@ function FingerHandpose() {
 
   ///////// NEW STUFF ADDED STATE HOOK
 
-  const runHandpose = async () => {
-    const net = await handpose.load();
-    console.log("Handpose model loaded.");
-    //  Loop and detect hands
-    setInterval(() => {
-      detect(net);
-    }, 10);
-  };
 
   const detect = async (net) => {
     // Check data is available
@@ -105,7 +97,17 @@ function FingerHandpose() {
     }
   };
 
-  useEffect(() => { runHandpose() }, []);
+  useEffect(() => {
+    const runHandpose = async () => {
+      const net = await handpose.load();
+      // console.log("Handpose model loaded.");
+      //  Loop and detect hands
+      setInterval(() => {
+        detect(net);
+      }, 10);
+    };
+    runHandpose()
+  }, []);
 
   return (
     <div className="App">
@@ -140,8 +142,9 @@ function FingerHandpose() {
           }}
         />
         {/* NEW STUFF */}
-        {emoji !== null ? (
+        {emoji !== null && (
           <img
+            alt="imageAlt"
             src={images[emoji]}
             style={{
               position: "absolute",
@@ -155,8 +158,6 @@ function FingerHandpose() {
               height: 100,
             }}
           />
-        ) : (
-          ""
         )}
 
       </header>

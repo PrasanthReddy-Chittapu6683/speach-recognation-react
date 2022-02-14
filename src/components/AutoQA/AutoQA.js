@@ -1,25 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react'
-import * as tf from "@tensorflow/tfjs";
+// import * as tf from "@tensorflow/tfjs";
 import * as qna from "@tensorflow-models/qna";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import {
-    Box, Card, CardContent, FilledInput, FormControl, FormHelperText, IconButton, InputAdornment, InputBase, List, ListItem, ListItemText, MenuItem, Paper,
-    TextareaAutosize, TextField, Typography
+    Box, Card, CardContent, FormControl, FormHelperText, IconButton, InputBase, List, ListItem, ListItemText, MenuItem, Paper,
+    TextareaAutosize, Typography
 } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import Divider from '@material-ui/core/Divider';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import { MdAccountCircle, MdQuestionAnswer } from 'react-icons/md';
+// import { MdAccountCircle, MdQuestionAnswer } from 'react-icons/md';
 import { FcAnswers, FcQuestions, FcSpeaker } from 'react-icons/fc';
-import { FaArrowCircleRight, FaDirections, FaMicrophoneAlt, FaPause, FaPauseCircle, FaRegPauseCircle, FaSearch, FaStop, FaStopCircle } from 'react-icons/fa';
-import { GrResume } from 'react-icons/gr';
+import { FaArrowCircleRight, FaMicrophoneAlt, FaRegPauseCircle, FaSearch, FaStopCircle } from 'react-icons/fa';
+// import { GrResume } from 'react-icons/gr';
 
 // import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
+// import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import { AiFillPlayCircle } from 'react-icons/ai';
-import { RiKakaoTalkFill } from 'react-icons/ri';
+// import { RiKakaoTalkFill } from 'react-icons/ri';
 
 import Select from '@material-ui/core/Select';
 
@@ -66,7 +66,7 @@ mic.lang = "en-US";
 let synth = speechSynthesis;
 if (synth.speaking) { /* stop narration */
     /* for safari  flag = false;*/
-    debugger;
+
     synth.cancel();
 }
 const AutoQA = () => {
@@ -77,8 +77,8 @@ const AutoQA = () => {
     const [isPlaying, setIsPlaying] = useState(false)
     const [isResumePlaying, setisResumePlaying] = useState(false)
     const classes = useStyles();
-    const [note, setNote] = useState("");
-    const [isListening, setIsListening] = useState(true);
+    const [setNote] = useState("");
+    // const [isListening, setIsListening] = useState(true);
     const [isLoading, setIsLoading] = useState(false)
     const [voicesList, setVoicesList] = useState([])
     // Load Tensorflow Model
@@ -245,8 +245,9 @@ const AutoQA = () => {
                             <Box p={2} display='flex' flex='1'  >
 
 
-                                <Typography style={{ display: 'flex', alignItems: 'center', flex: 0.5 }} component="h6" variant="h6">Paste your content below and ask questions
-                              {
+                                <Typography style={{ display: 'flex', alignItems: 'center', flex: 0.5 }} component="h6" variant="h6">
+                                    Paste your content below and ask questions
+                                    {
                                         !isPlaying ?
                                             <IconButton title='Read the content loud' style={{ cursor: 'pointer' }} onClick={readLoud}
                                                 className={classes.iconButton} >
@@ -322,7 +323,7 @@ const AutoQA = () => {
                                 <IconButton color="primary" onClick={handleListen} className={classes.iconButton} >
                                     {
                                         !micState ?
-                                            <FaMicrophoneAlt title='Start speaking'/>
+                                            <FaMicrophoneAlt title='Start speaking' />
 
                                             :
                                             <Loader type="ThreeDots" title='Stop speaking' color="#00BFFF" height={20} width={22} />

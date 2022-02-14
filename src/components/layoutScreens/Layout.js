@@ -24,16 +24,16 @@ import { RiArrowLeftRightFill } from 'react-icons/ri';
 import { AiFillGithub } from 'react-icons/ai';
 import TermsAndCondition from '../speechRecognition/termsAndCondition';
 import AutoQA from '../AutoQA/AutoQA';
-
+import Dashboard from '../Dashboard/Dashboard'
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
-    NavLink
-  } from "react-router-dom";
+} from "react-router-dom";
 
-import FingerHandpose from "../fingerhandpose/FingerHandpose"; 
+import FingerHandpose from "../fingerhandpose/FingerHandpose";
 import FaceDetection from "../FaceDetection/FaceDetection";
+// import CustomObjectDetectionTF from '../CustomObjectDetectionTF/CustomObjectDetectionTF';
+import ObjectDetection from '../CustomObjectDetectionTF/ObjectDetection';
 
 const drawerWidth = 240;
 
@@ -152,7 +152,7 @@ const Layout = () => {
 
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
 
-                        Power of React with AI
+                         React with AI
                     </Typography>
 
                     <IconButton color="inherit">
@@ -186,6 +186,9 @@ const Layout = () => {
                                     <Route path="/speechrecognition">
                                         <TermsAndCondition />
                                     </Route>
+                                    <Route path="/customobjectdetection">
+                                        <ObjectDetection />
+                                    </Route>
                                     <Route path="/handfingerpose">
                                         <Box p={2} m={2} justifyContent='center' alignItems='center'>
                                             <Box p={2} display='flex' flex='1'  >
@@ -200,10 +203,25 @@ const Layout = () => {
                                             </Box>
                                         </Box>
                                     </Route>
-                                    <Route path="/">
-                                        <Typography component="h1" variant="h4" style={{display:'flex', justifyContent:'center' , alignContent:'center'}}><MdQuestionAnswer/> Have content and ask Quetions : </Typography>
+                                    <Route path="/AutoQA">
+                                        <Typography component="h1" variant="h4" style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}><MdQuestionAnswer /> Have content and ask Quetions : </Typography>
                                         {/* <TermsAndCondition /> */}
                                         <AutoQA />
+                                    </Route>
+                                    <Route path="/">
+                                        <Typography component="h1" variant="h4" style={{
+                                            display: 'flex', justifyContent: 'center',
+                                            alignContent: 'center'
+                                        }}><MdQuestionAnswer /> Dashboard </Typography>
+                                        {/* <TermsAndCondition /> */}
+                                        <Dashboard />
+                                    </Route>
+                                    <Route path="/">
+                                        <Box p={2} m={2} justifyContent='center' alignItems='center'>
+                                            <Box p={2} display='flex' flex='1'  >
+                                                <FingerHandpose />
+                                            </Box>
+                                        </Box>
                                     </Route>
                                 </Switch>
                             </Paper>

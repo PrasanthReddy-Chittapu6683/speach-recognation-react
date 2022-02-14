@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import "./termsAndCondition.css";
 
@@ -108,10 +107,9 @@ export default class TermsAndCondition extends React.Component {
               </div>
               <div>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary agree-section"
                   id="utterance"
                   onClick={this.onLoad}
-                  className="agree-section"
                 >
                   {this.state.utterance ? "Stop" : "Say out loud"}
                 </button>
@@ -126,15 +124,13 @@ export default class TermsAndCondition extends React.Component {
                 <br />
                 <br />
                 {/* <Link to="/home"> */}
-                  <button
-                    id="submit"
-                    className="btn btn-primary"
-                    className="agree-section"
-                    disabled
-                  >
-                    Proceed to Home page
-                  </button>
-                {/* </Link> */}
+                <button
+                  id="submit"
+                  className="btn btn-primary agree-section"
+                  disabled
+                >
+                  Proceed to Home page
+                </button>
               </div>
             </div>
           </div>

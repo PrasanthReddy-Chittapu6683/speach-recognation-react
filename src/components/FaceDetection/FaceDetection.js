@@ -11,7 +11,7 @@
 
 import React, { useRef, useEffect } from "react";
 import "../../App.css";
-import * as tf from "@tensorflow/tfjs";
+// import * as tf from "@tensorflow/tfjs";
 // OLD MODEL
 //import * as facemesh from "@tensorflow-models/facemesh";
 
@@ -19,11 +19,14 @@ import * as tf from "@tensorflow/tfjs";
 import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import Webcam from "react-webcam";
 import { drawMesh } from "./utilities";
+import { useErrorHandler } from "react-error-boundary";
+import { Typography, Box } from '@material-ui/core';
+
 
 function FaceDetection() {
   const webcamRef1 = useRef(null);
   const canvasRef1 = useRef(null);
-
+  const handleErrors = useErrorHandler()
   //  Load posenet
   const runFacemesh = async () => {
     // OLD MODEL
@@ -39,42 +42,57 @@ function FaceDetection() {
   };
 
   const detect = async (net) => {
-    if (
-      typeof webcamRef1.current !== "undefined" &&
-      webcamRef1.current !== null &&
-      webcamRef1.current.video.readyState === 4
-    ) {
-      // Get Video Properties
-      const video1 = webcamRef1.current.video;
-      const videoWidth1 = webcamRef1.current.video.videoWidth;
-      const videoHeight1 = webcamRef1.current.video.videoHeight;
+    try {
 
-      // Set video width
-      webcamRef1.current.video.width = videoWidth1;
-      webcamRef1.current.video.height = videoHeight1;
 
-      // Set canvas width
-      canvasRef1.current.width = videoWidth1;
-      canvasRef1.current.height = videoHeight1;
+      if (
+        typeof webcamRef1.current !== "undefined" &&
+        webcamRef1.current !== null &&
+        webcamRef1.current.video.readyState === 4
+      ) {
+        // Get Video Properties
+        const video1 = webcamRef1.current.video;
+        const videoWidth1 = webcamRef1.current.video.videoWidth;
+        const videoHeight1 = webcamRef1.current.video.videoHeight;
 
-      // Make Detections
-      // OLD MODEL
-      //       const face = await net.estimateFaces(video);
-      // NEW MODEL
-      const face1 = await net.estimateFaces({input:video1});
-      //console.log(face);
+        // Set video width
+        webcamRef1.current.video.width = videoWidth1;
+        webcamRef1.current.video.height = videoHeight1;
 
-      // Get canvas context
-      const ctx1 = canvasRef1.current.getContext("2d");
-      requestAnimationFrame(()=>{drawMesh(face1, ctx1)});
+        // Set canvas width
+        canvasRef1.current.width = videoWidth1;
+        canvasRef1.current.height = videoHeight1;
+
+        // Make Detections
+        // OLD MODEL
+        //       const face = await net.estimateFaces(video);
+        // NEW MODEL
+        const face1 = await net.estimateFaces({ input: video1 });
+        //console.log(face);
+
+        // Get canvas context
+        const ctx1 = canvasRef1.current.getContext("2d");
+        requestAnimationFrame(() => { drawMesh(face1, ctx1) });
+      }
+    }
+    catch (e) {
+
+      handleErrors(e)
+      // console.log("FaceDetection:: " + e)
     }
   };
 
-  useEffect(()=>{runFacemesh()}, []);
+  useEffect(() => { runFacemesh() }, []);
 
   return (
-    <div className="App">
+    <Box className="App" display={'flex'} justifyContent={'center'} flex={1} alignItems={'center'}>
       <header className="App-header">
+        <Box display={'flex'} justifyContent={'center'} flex={1} alignItems={'center'} color={'#14a37f'}
+          m={5}>
+
+          <Typography variant="h3">Face Detection</Typography>
+        </Box>
+
         <Webcam
           ref={webcamRef1}
           style={{
@@ -105,7 +123,7 @@ function FaceDetection() {
           }}
         />
       </header>
-    </div>
+    </Box>
   );
 }
 

@@ -111,7 +111,7 @@ function SpeakSearchSaveComponent() {
               value="search"
               name="choice"
               onChange={optionhandler}
-            />{" "}
+            />
             Search
             <input
               type="radio"

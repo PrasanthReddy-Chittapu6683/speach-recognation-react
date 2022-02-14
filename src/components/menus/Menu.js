@@ -1,7 +1,7 @@
 import React from 'react'
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
-import ListSubheader from '@material-ui/core/ListSubheader';
+// import ListSubheader from '@material-ui/core/ListSubheader';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 // import DashboardIcon from '@material-ui/icons/Dashboard';
 // import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -10,28 +10,57 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 // import LayersIcon from '@material-ui/icons/Layers';
 // import AssignmentIcon from '@material-ui/icons/Assignment';
 
-import { MdDashboard, MdShoppingCart, MdPeople, MdLayers, MdAssessment } from 'react-icons/md'
+// import { MdDashboard, MdShoppingCart, MdPeople, MdLayers, MdAssessment } from 'react-icons/md'
 
 import { GiMetalHand } from 'react-icons/gi'
-import { SiTeamspeak } from 'react-icons/si'
-import { RiBarChartGroupedLine } from 'react-icons/ri'
+import { RiUserVoiceFill } from 'react-icons/ri'
+
+import { SiTeamspeak, SiTensorflow } from 'react-icons/si'
+// import { RiBarChartGroupedLine } from 'react-icons/ri'
 import { GiCyborgFace } from "react-icons/gi";
 
 
-import FingerHandpose from "../fingerhandpose/FingerHandpose";
-import FaceDetection from "../FaceDetection/FaceDetection";
+// import FingerHandpose from "../fingerhandpose/FingerHandpose";
+// import FaceDetection from "../FaceDetection/FaceDetection";
 
 import {
-    BrowserRouter as Router,
     NavLink
 } from "react-router-dom";
+// import { FiHome } from 'react-icons/fi';
+import { AiFillHome } from 'react-icons/ai';
 
 export const mainListItems = (
     <div>
         <NavLink to="/" >
-            <ListItem button title="Speech Recognition"s >
+            <ListItem button title="Speech Recognition" >
                 <ListItemIcon >
-                    <SiTeamspeak  style={{ color: '#3f51b5' }} />
+                    <AiFillHome style={{ color: '#14a37f' }} />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+            </ListItem>
+        </NavLink>
+        <NavLink to="/customobjectdetection">
+            <ListItem button title="Custom Object Detection" >
+                <ListItemIcon  >
+                    <SiTensorflow style={{ color: '#14a37f' }}> </SiTensorflow>
+                    {/* // <ImUserCheck /> */}
+                </ListItemIcon>
+                <ListItemText primary="Custom Object Detection" />
+            </ListItem>
+        </NavLink>
+        <NavLink to="/facedetection">
+            <ListItem button title="Face Detection" >
+                <ListItemIcon  >
+                    <GiCyborgFace style={{ color: '#14a37f' }}> </GiCyborgFace>
+                    {/* // <ImUserCheck /> */}
+                </ListItemIcon>
+                <ListItemText primary="Face Detection" />
+            </ListItem>
+        </NavLink>
+        <NavLink to="/AutoQA">
+            <ListItem button title="Speech Recognition"  >
+                <ListItemIcon >
+                    <SiTeamspeak style={{ color: '#14a37f' }} />
                 </ListItemIcon>
                 <ListItemText primary="Speech Recognition" />
             </ListItem>
@@ -39,24 +68,24 @@ export const mainListItems = (
         <NavLink to="/handfingerpose">
             <ListItem button title="Hand Detection" >
                 <ListItemIcon  >
-                    <GiMetalHand  style={{ color: '#3f51b5' }} />
+                    <GiMetalHand style={{ color: '#14a37f' }} />
                 </ListItemIcon>
                 <ListItemText primary="Hand Detection" />
             </ListItem>
         </NavLink>
-        <NavLink to="/facedetection">
-            <ListItem button   title="Face Detection" >
-                <ListItemIcon  >
-                <GiCyborgFace   style={{ color: '#3f51b5' }}> </GiCyborgFace>
-                    {/* // <ImUserCheck /> */}
+        <a target='_blank' href="https://voice-assist-faq-ai-app.web.app/">
+            <ListItem button title="Voice AI" >
+                <ListItemIcon>
+                    <RiUserVoiceFill style={{ color: '#14a37f' }} />
                 </ListItemIcon>
-                <ListItemText primary="Face Detection" />
+                <ListItemText primary="Voice AI" />
             </ListItem>
-        </NavLink>
+        </a>
+
         {/* <NavLink to="/speechrecognition">
             <ListItem button>
                 <ListItemIcon>
-                    <MdPeople style={{ color: '#3f51b5' }}/>
+                    <MdPeople style={{ color: '#14a37f' }}/>
                 </ListItemIcon>
                 <ListItemText primary="Content Reading" />
             </ListItem>

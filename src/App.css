@@ -58,6 +58,13 @@ ul li NavLink {
   font-size: 2em;
 }
 
-a{
+a {
   text-decoration: none !important;
+  font-size: 10px;
+  color: #595959;
+}
+
+.MuiAppBar-colorPrimary {
+  color: #fff;
+  background-color: #14a37f !important;
 }

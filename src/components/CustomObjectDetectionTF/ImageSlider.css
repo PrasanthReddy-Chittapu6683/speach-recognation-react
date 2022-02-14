@@ -1,0 +1,33 @@
+.banner__items>button {
+    height: 40px;
+    background-color: #f0c14b;
+    border: 1px solid;
+    margin-top: 10px;
+    border-color: #a88734 #9c7e31 #846a29;
+    color: #111;
+    border-radius: 5px;
+}
+
+.banner__items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    padding: 20px;
+    width: 50%;
+    max-height: 100px;
+    min-width: 100px;
+    background-color: white;
+    z-index: 1;
+    /* float: left; */
+
+}
+
+.MuiPaper-elevation1 {
+    box-shadow: none !important;
+}
+
+.MuiPaper-rounded {
+    border-radius: 0px !important;
+}
